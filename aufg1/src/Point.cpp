@@ -6,6 +6,7 @@
  */
 
 #include "Point.h"
+
 #include <iostream>
 
 Point::Point() {
@@ -13,16 +14,16 @@ Point::Point() {
 	this->y = 0;
 }
 
-Point::Point(float x, float y) {
+Point::Point(double x, double y) {
 	this->x = x;
 	this->y = y;
 }
 
-float Point::getX() const {
+double Point::getX() const {
 	return x;
 }
 
-float Point::getY() const {
+double Point::getY() const {
 	return y;
 }
 

@@ -10,13 +10,13 @@
 
 class Point {
 private:
-	float x,y;
+	double x, y;
 public:
 	Point();
-	Point(float x, float y);
+	Point(double x, double y);
 	virtual ~Point();
-	float getX() const;
-	float getY() const;
+	double getX() const;
+	double getY() const;
 };
 
 #endif /* POINT_H_ */

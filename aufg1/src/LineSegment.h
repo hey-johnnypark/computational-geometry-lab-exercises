@@ -6,13 +6,20 @@
  */
 
 #include "Point.h"
+#include <stdlib.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <stdio.h>
+
 
 #ifndef LINESEGMENT_H_
 #define LINESEGMENT_H_
 
 class LineSegment {
 private:
-	Point a,b;
+	Point a, b;
 public:
 	LineSegment(Point a, Point b);
 	virtual ~LineSegment();
@@ -20,5 +27,7 @@ public:
 	const Point& getA() const;
 	const Point& getB() const;
 };
+
+
 
 #endif /* LINESEGMENT_H_ */
