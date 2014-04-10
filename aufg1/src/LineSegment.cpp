@@ -8,10 +8,15 @@
 #include "LineSegment.h"
 #include "Triangle.h"
 
-LineSegment::LineSegment(Point a, Point b) {
-	this->a = a;
-	this->b = b;
+LineSegment::LineSegment(const LineSegment &other) :
+		a(other.a), b(other.b) {
 }
+;
+
+LineSegment::LineSegment(Point a, Point b) :
+		a(a), b(b) {
+}
+;
 
 const Point& LineSegment::getA() const {
 	return a;
@@ -29,6 +34,7 @@ bool LineSegment::cuts(LineSegment other) {
 	return test1 <= 0 && test2 <= 0;
 }
 
-LineSegment::~LineSegment() {
+std::ostream& operator<<(std::ostream &strm, const LineSegment &a) {
+	return strm << "LineSegment(" << a.getA() << ", " << a.getB() << ")";
 }
 

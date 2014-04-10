@@ -32,5 +32,5 @@ Point::~Point() {
 }
 
 std::ostream& operator<<(std::ostream &strm, const Point &a) {
-	return strm << "P(" << a.getX() << ")";
+	return strm << "P(" << a.getX() << "," << a.getX() << ")";
 }
