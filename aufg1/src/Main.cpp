@@ -8,17 +8,28 @@
 #include "StringHelper.h"
 #include "LineSegment.h"
 #include "Point.h"
-
+#include "Main.h"
+#include <time.h>
+#include <ctime>
 //#include "Triangle.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
 
+	bench("resources/Strecken_1000.txt");
+	bench("resources/Strecken_10000.txt");
+	bench("resources/Strecken_100000.txt");
+
+}
+
+void bench(string file) {
+	time_t start = time(NULL) * 1000;
+	cout << "Starting benchmark for file [" << file << "] at " << start << endl;
 	vector<LineSegment> lineSegments;
 	string line;
 	ifstream infile;
-	infile.open("resources/Strecken_1000.txt");
+	infile.open(file);
 	while (true) // To get you all the lines.
 	{
 		getline(infile, line);
@@ -35,20 +46,27 @@ int main(int argc, char **argv) {
 
 	}
 	infile.close();
+	cout << "Read " << lineSegments.size() << " line segments from [" << file
+			<< "] at " << time(NULL) * 1000 << endl;
 
-	cout << "Total lines: " << lineSegments.size();
-
-	int cuttedLines = 0;
+	int interval_start = 1;
+	int num_segments = lineSegments.size();
+	int num_cuts = 0;
 
 	for (LineSegment segment : lineSegments) {
-		for (LineSegment otherSegment : lineSegments) {
-			if (segment.cuts(otherSegment)) {
-				cuttedLines++;
+		for (int current = interval_start; current < num_segments; current++) {
+			LineSegment segmentToCompare = lineSegments[current];
+			if (segment.cuts(segmentToCompare)) {
+				num_cuts++;
 			}
 		}
+		interval_start++;
 	}
 
-	cout << "Total: " << cuttedLines;
+	cout << "# of cuts between line segments: " << num_cuts << endl;
+
+	long duration = time(NULL) * 1000 - start;
+	cout << "Total time needed: " << duration << "ms"<< endl << endl;
 
 }
 
