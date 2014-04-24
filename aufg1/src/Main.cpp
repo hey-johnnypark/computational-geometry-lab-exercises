@@ -8,6 +8,7 @@
 #include "StringHelper.h"
 #include "LineSegment.h"
 #include "Point.h"
+#include "Progress.h"
 #include "Main.h"
 #include <time.h>
 #include <ctime>
@@ -52,8 +53,10 @@ void bench(string file) {
 	int interval_start = 1;
 	int num_segments = lineSegments.size();
 	int num_cuts = 0;
+	Progress progress = Progress(lineSegments.size());
 
 	for (LineSegment segment : lineSegments) {
+
 		for (int current = interval_start; current < num_segments; current++) {
 			LineSegment segmentToCompare = lineSegments[current];
 			if (segment.cuts(segmentToCompare)) {
@@ -61,12 +64,13 @@ void bench(string file) {
 			}
 		}
 		interval_start++;
+		progress.incrProgress();
 	}
 
 	cout << "# of cuts between line segments: " << num_cuts << endl;
 
 	long duration = time(NULL) * 1000 - start;
-	cout << "Total time needed: " << duration << "ms"<< endl << endl;
+	cout << "Total time needed: " << duration << "ms" << endl << endl;
 
 }
 
