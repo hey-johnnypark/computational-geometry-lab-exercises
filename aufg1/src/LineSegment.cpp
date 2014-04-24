@@ -41,3 +41,8 @@ std::ostream& operator<<(std::ostream &strm, const LineSegment &a) {
 	return strm << "LineSegment(" << a.getA() << ", " << a.getB() << ")";
 }
 
+std::ostream& operator<<(std::ostream &strm, const LineSegment* a) {
+	return strm << "LineSegment(" << a->getA() << ", " << a->getB() << ")";
+}
+
+

@@ -27,5 +27,6 @@ public:
 };
 
 std::ostream& operator<<(std::ostream &strm, const LineSegment &a);
+std::ostream& operator<<(std::ostream &strm, const LineSegment* a);
 
 #endif /* LINESEGMENT_H_ */

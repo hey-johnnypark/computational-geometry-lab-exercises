@@ -18,9 +18,12 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-	bench("resources/Strecken_1000.txt");
-	bench("resources/Strecken_10000.txt");
-	bench("resources/Strecken_100000.txt");
+	LineSegment* line = new LineSegment(Point(0,0), Point(1,1));
+	cout << line;
+
+	//bench("resources/Strecken_1000.txt");
+	//bench("resources/Strecken_10000.txt");
+	//bench("resources/Strecken_100000.txt");
 
 }
 
