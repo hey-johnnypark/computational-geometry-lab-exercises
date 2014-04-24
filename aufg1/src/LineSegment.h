@@ -17,6 +17,7 @@
 class LineSegment {
 private:
 	Point a, b;
+	int ccw(Point a, Point b, Point c);
 public:
 	LineSegment(Point a, Point b);
 	LineSegment(const LineSegment& other);

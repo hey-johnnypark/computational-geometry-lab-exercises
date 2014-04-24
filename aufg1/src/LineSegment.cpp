@@ -6,7 +6,6 @@
  */
 
 #include "LineSegment.h"
-#include "Triangle.h"
 
 LineSegment::LineSegment(const LineSegment &other) :
 		a(other.a), b(other.b) {
@@ -27,11 +26,20 @@ const Point& LineSegment::getB() const {
 }
 
 bool LineSegment::cuts(LineSegment other) {
-	int test1 = Triangle(a, b, other.getA()).ccw()
-			* Triangle(a, b, other.getB()).ccw();
-	int test2 = Triangle(other.getA(), other.getB(), a).ccw()
-			* Triangle(other.getA(), other.getB(), b).ccw();
+//	int test1 = Triangle(a, b, other.getA()).ccw()
+//			* Triangle(a, b, other.getB()).ccw();
+	int test1 = ccw(a, b, other.getA()) * ccw(a, b, other.getB());
+
+//	int test2 = Triangle(other.getA(), other.getB(), a).ccw()
+//			* Triangle(other.getA(), other.getB(), b).ccw();
+	int test2 = ccw(other.getA(), other.getB(), a) * ccw(other.getA(), other.getB(), b);
 	return test1 <= 0 && test2 <= 0;
+}
+
+int LineSegment::ccw(Point a, Point b, Point c) {
+	return (a.x * b.y - a.y * b.x)
+				+ (b.x * c.y - b.y * c.x)
+				+ (a.y * c.x - a.x * c.y);
 }
 
 std::ostream& operator<<(std::ostream &strm, const LineSegment &a) {

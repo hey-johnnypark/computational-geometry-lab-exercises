@@ -16,14 +16,10 @@
 
 
 class Point {
-private:
-	double x, y;
 public:
-	Point();
-	Point(double x, double y);
+	const double x, y;
+	Point(double x, double y) : x(x), y(y){};
 	virtual ~Point();
-	double getX() const;
-	double getY() const;
 };
 
 std::ostream& operator<<(std::ostream &strm, const Point &a);
