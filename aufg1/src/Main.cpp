@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 void bench(string file) {
 	time_t start = time(NULL) * 1000;
 	cout << "Starting benchmark for file [" << file << "] at " << start << endl;
-	vector<LineSegment> lineSegments;
+	vector<LineSegment*> lineSegments;
 	string line;
 	ifstream infile;
 	infile.open(file);
@@ -40,7 +40,7 @@ void bench(string file) {
 			double p2 = atof(lineParts[1].c_str());
 			double p3 = atof(lineParts[2].c_str());
 			double p4 = atof(lineParts[3].c_str());
-			lineSegments.push_back(LineSegment(Point(p1, p2), Point(p3, p4)));
+			lineSegments.push_back(new LineSegment(Point(p1, p2), Point(p3, p4)));
 		} else {
 			break;
 		}
@@ -55,11 +55,11 @@ void bench(string file) {
 	int num_cuts = 0;
 	Progress progress = Progress(lineSegments.size());
 
-	for (LineSegment segment : lineSegments) {
+	for (LineSegment* segment : lineSegments) {
 
 		for (int current = interval_start; current < num_segments; current++) {
-			LineSegment segmentToCompare = lineSegments[current];
-			if (segment.cuts(segmentToCompare)) {
+			LineSegment* segmentToCompare = lineSegments[current];
+			if (segment->cuts(segmentToCompare)) {
 				num_cuts++;
 			}
 		}

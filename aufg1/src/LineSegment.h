@@ -21,7 +21,7 @@ private:
 public:
 	LineSegment(Point a, Point b);
 	LineSegment(const LineSegment& other);
-	bool cuts(LineSegment otherLineSegment);
+	bool cuts(LineSegment* otherLineSegment);
 	const Point& getA() const;
 	const Point& getB() const;
 };

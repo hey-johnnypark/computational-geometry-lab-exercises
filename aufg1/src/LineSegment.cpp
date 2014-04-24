@@ -25,14 +25,9 @@ const Point& LineSegment::getB() const {
 	return b;
 }
 
-bool LineSegment::cuts(LineSegment other) {
-//	int test1 = Triangle(a, b, other.getA()).ccw()
-//			* Triangle(a, b, other.getB()).ccw();
-	int test1 = ccw(a, b, other.getA()) * ccw(a, b, other.getB());
-
-//	int test2 = Triangle(other.getA(), other.getB(), a).ccw()
-//			* Triangle(other.getA(), other.getB(), b).ccw();
-	int test2 = ccw(other.getA(), other.getB(), a) * ccw(other.getA(), other.getB(), b);
+bool LineSegment::cuts(LineSegment* other) {
+	int test1 = ccw(a, b, other->getA()) * ccw(a, b, other->getB());
+	int test2 = ccw(other->getA(), other->getB(), a) * ccw(other->getA(), other->getB(), b);
 	return test1 <= 0 && test2 <= 0;
 }
 
