@@ -17,13 +17,13 @@
 class LineSegment {
 private:
 	Point a, b;
-	int ccw(Point a, Point b, Point c);
+	int ccw(Point* a, Point* b, Point* c);
 public:
 	LineSegment(Point a, Point b);
 	LineSegment(const LineSegment& other);
 	bool cuts(LineSegment* otherLineSegment);
-	const Point& getA() const;
-	const Point& getB() const;
+	Point* getA();
+	Point* getB();
 };
 
 std::ostream& operator<<(std::ostream &strm, const LineSegment &a);
