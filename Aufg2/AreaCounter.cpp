@@ -26,7 +26,7 @@ float AreaCounter::calculateArea(){
 		Point tempPointC = vect.at(start - 1);
 		float tempArea = ((float)tempPointA.getY() * ( tempPointC.getX() - tempPointB.getX())) / 2;
 
-		cout <<" A: " << tempPointA.getX() << " / " << tempPointA.getY() << " tempArea: " << tempArea << "\n";
+		//cout <<" A: " << tempPointA.getX() << " / " << tempPointA.getY() << " tempArea: " << tempArea << "\n";
 		return tempArea;
 	} else {
 
@@ -41,7 +41,7 @@ float AreaCounter::calculateArea(){
 		}
 
 		float tempArea = ((float)tempPointA.getY() * ( tempPointC.getX() - tempPointB.getX())) / 2;
-		cout <<" A: " << tempPointA.getX() << " / " << tempPointA.getY() << " tempArea: " << tempArea << "\n";
+		//cout <<" A: " << tempPointA.getX() << " / " << tempPointA.getY() << " tempArea: " << tempArea << "\n";
 		start++;
 		return tempArea + calculateArea();
 

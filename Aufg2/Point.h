@@ -9,15 +9,15 @@
 #define POINT_H_
 
 class Point {
-	int x,y;
+	float x,y;
 public:
-	Point(int x, int y);
+	Point(float x, float y);
 	virtual ~Point();
 
-	int getX() const{
+	float getX() const{
 		return x;
 	}
-	int getY() const {
+	float getY() const {
 		return y;
 	}
 
