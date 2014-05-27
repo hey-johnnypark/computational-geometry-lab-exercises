@@ -21,6 +21,7 @@ public:
 	AreaCounter(std::vector<Point>);
 	virtual ~AreaCounter();
 	float calculateArea();
+	float calculateArea_2();
 };
 
 #endif /* AREACOUNTER_H_ */

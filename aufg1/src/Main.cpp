@@ -19,8 +19,8 @@ using namespace std;
 int main(int argc, char **argv) {
 
 	bench("resources/Strecken_1000.txt");
-	bench("resources/Strecken_10000.txt");
-	bench("resources/Strecken_100000.txt");
+//	bench("resources/Strecken_10000.txt");
+	//bench("resources/Strecken_100000.txt");
 
 }
 
@@ -30,7 +30,7 @@ void bench(string file) {
 	vector<LineSegment*> lineSegments;
 	string line;
 	ifstream infile;
-	infile.open(file);
+	infile.open("resources/Strecken_10000.txt");
 	while (true) // To get you all the lines.
 	{
 		getline(infile, line);
@@ -55,8 +55,9 @@ void bench(string file) {
 	int num_cuts = 0;
 	Progress progress = Progress(lineSegments.size());
 
-	for (LineSegment* segment : lineSegments) {
-
+	LineSegment* segment = 0;
+	for (unsigned int i = 0 ; i < lineSegments.size() ; i++) {
+		segment = lineSegments.at(i);
 		for (int current = interval_start; current < num_segments; current++) {
 			LineSegment* segmentToCompare = lineSegments[current];
 			if (segment->cuts(segmentToCompare)) {

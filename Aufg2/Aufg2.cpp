@@ -14,57 +14,63 @@ using namespace std;
 #include <fstream>
 #include <iostream>
 #include "StringHelper.h"
+#include "Polygon.h"
 
 void calculate(string currentBundesland){
 			std::vector<Point> points;
+			std::vector<Polygon> polygons;
 			string line;
 			ifstream infile;
 			infile.open(currentBundesland.c_str());
-
+			Point root(0,0);
 			while (true) // To get you all the lines.
 			{
 				getline(infile, line);
 				if (line != "") {
-					vector<string> lineParts = StringHelper::split(line, ',');
-					float p1 = atof(lineParts[0].c_str());
-					float p2 = atof(lineParts[1].c_str());
-					points.push_back(Point(p1,p2));
+					if(line.substr(0,1) == "M"){
+						points.clear();
+						vector<string> lineParts = StringHelper::split(line, ',');
+						float p1 = atof(lineParts[0].substr(1,4).c_str());
+						float p2 = atof(lineParts[1].c_str());
+						points.push_back(Point(p1,p2));
+						root = Point(p1,p2);
+
+					} else if(line.substr(0,1) == "l"){
+						vector<string> lineParts = StringHelper::split(line, ',');
+						float p1 = atof(lineParts[0].substr(1,4).c_str()) + root.getX();
+						float p2 = atof(lineParts[1].c_str()) + root.getY();
+						points.push_back(Point(p1,p2));
+					} else if(line.substr(0,1) == "z"){
+						polygons.push_back(Polygon(points));
+					}
+
 				} else {
+//					cout << points.size() << " POINST SIZE" << endl;
+//					cout << polygons.size() << "POLYGON SIZEEEEEee"<< endl;
+//					cout << polygons.at(10).getPoints().size() << " Points in POLYGON SIZEEEEEee"<< endl;
+//					cout << polygons.at(0).getPoints().size() << " Points in POLYGON SIZEEEEEee"<< endl;
 					break;
 				}
 
 			}
 
 			infile.close();
-			AreaCounter counter(points);
-			float floater2 = counter.calculateArea();
+			float totalArea = 0;
+			for(unsigned int i = 0; i < polygons.size(); i++){
+				AreaCounter counter(polygons.at(i).getPoints());
+				float floater2 = counter.calculateArea();
+				totalArea += floater2;
+			}
 
-			cout << currentBundesland<<":  " <<floater2 << endl; // prints
-
+			cout << currentBundesland<<":  " <<totalArea << endl; // prints
 }
 
 
 
 
 int main() {
-//	Point a(12.5,12.4);
-//	Point b(124.4,124.32);
-//	Point c(123.3,21.1);
-//	Point d(38,1);
-//	Point e(29,933);
-//	Point f(12,11);
-//	Point g(122,113);
-//	std::vector<Point> ver;
-//	ver.push_back(a);
-//	ver.push_back(b);
-//	ver.push_back(c);
-////	ver.push_back(d);
-////	ver.push_back(e);
-////	ver.push_back(f);
-//	//ver.push_back(g);
-//	AreaCounter counte(ver);
-//	float floater = counte.calculateArea();
 
+//
 	calculate("resrc/Saarland.txt");
 	calculate("resrc/badenWürttenbergg.txt");
 	calculate("resrc/Bayern.txt");
@@ -79,8 +85,8 @@ int main() {
 	calculate("resrc/ReinlandPfalz.txt");
 	calculate("resrc/Sachsen.txt");
 	calculate("resrc/SachsenAnhalt.txt");
-	calculate("resrc/Schleswig-Holstein.txt");
-	calculate("resrc/Thüringen.txt");
+ calculate("resrc/Schleswig-Holstein.txt");
+ calculate("resrc/Thüringen.txt");
 
 
 
