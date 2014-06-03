@@ -30,18 +30,22 @@ void calculate(string currentBundesland){
 					if(line.substr(0,1) == "M"){
 						points.clear();
 						vector<string> lineParts = StringHelper::split(line, ',');
-						float p1 = atof(lineParts[0].substr(1,4).c_str());
+						float p1 = atof(lineParts[0].substr(1,lineParts[0].length()).c_str());
 						float p2 = atof(lineParts[1].c_str());
 						points.push_back(Point(p1,p2));
 						root = Point(p1,p2);
-
 					} else if(line.substr(0,1) == "l"){
 						vector<string> lineParts = StringHelper::split(line, ',');
-						float p1 = atof(lineParts[0].substr(1,4).c_str()) + root.getX();
+						float p1 = atof(lineParts[0].substr(1,lineParts[0].length()).c_str()) + root.getX();
 						float p2 = atof(lineParts[1].c_str()) + root.getY();
 						points.push_back(Point(p1,p2));
 					} else if(line.substr(0,1) == "z"){
 						polygons.push_back(Polygon(points));
+					} else if(line.substr(0,1) == "L"){
+						vector<string> lineParts = StringHelper::split(line, ',');
+						float p1 = atof(lineParts[0].substr(1,lineParts[0].length()).c_str());
+						float p2 = atof(lineParts[1].c_str());
+						points.push_back(Point(p1,p2));
 					}
 
 				} else {
@@ -58,7 +62,7 @@ void calculate(string currentBundesland){
 			float totalArea = 0;
 			for(unsigned int i = 0; i < polygons.size(); i++){
 				AreaCounter counter(polygons.at(i).getPoints());
-				float floater2 = counter.calculateArea();
+				float floater2 = counter.calculateArea_2();
 				totalArea += floater2;
 			}
 

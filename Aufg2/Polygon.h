@@ -21,6 +21,10 @@ public:
 	std::vector<Point> getPoints() const {
 		return points;
 	}
+
+	bool pointInPolygon(Point point);
+	int ccw(Point a, Point b, Point c);
+	int sgn(int x);
 };
 
 
