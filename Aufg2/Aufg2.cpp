@@ -78,7 +78,7 @@ int main() {
 
 	calculate("resrc/Bayern.txt");
 	calculate("resrc/Saarland.txt");
-	calculate("resrc/badenW�rttenbergg.txt");
+	calculate("resrc/badenWuertenberg.txt");
 	calculate("resrc/Berlin.txt");
 	calculate("resrc/Brandenburg.txt");
 	calculate("resrc/Bremen.txt");
@@ -91,7 +91,7 @@ int main() {
 	calculate("resrc/Sachsen.txt");
 	calculate("resrc/SachsenAnhalt.txt");
 	calculate("resrc/Schleswig-Holstein.txt");
-	calculate("resrc/Th�ringen.txt");
+	calculate("resrc/Thueringen.txt");
 
 	return 0;
 }
