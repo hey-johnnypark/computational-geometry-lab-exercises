@@ -16,7 +16,9 @@ using namespace std;
 #include "StringHelper.h"
 #include "Polygon.h"
 
-void calculate(string currentBundesland) {
+const float area_factor = 1.17103781508;
+
+void calculate(string currentBundesland, float realArea) {
 	std::vector<Point> points;
 	std::vector<Polygon> polygons;
 	string line;
@@ -70,28 +72,33 @@ void calculate(string currentBundesland) {
 		totalArea = totalArea + floater2;
 	}
 
-	cout << currentBundesland << ":  " << totalArea << "( Poly: "
-			<< polygons.size() << ")" << endl;
+	cout << currentBundesland << ":  " << totalArea * area_factor << "( Poly: "
+			<< polygons.size() << ") " << "Real-Area: " << realArea
+			<< " square km" << endl;
 }
 
 int main() {
 
-	calculate("resrc/Bayern.txt");
-	calculate("resrc/Saarland.txt");
-	calculate("resrc/badenWuertenberg.txt");
-	calculate("resrc/Berlin.txt");
-	calculate("resrc/Brandenburg.txt");
-	calculate("resrc/Bremen.txt");
-	calculate("resrc/Hamburg.txt");
-	calculate("resrc/Hessen.txt");
-	calculate("resrc/MeckPommern.txt");
-	calculate("resrc/Niedersachsen.txt");
-	calculate("resrc/NordrheinWestfalen.txt");
-	calculate("resrc/ReinlandPfalz.txt");
-	calculate("resrc/Sachsen.txt");
-	calculate("resrc/SachsenAnhalt.txt");
-	calculate("resrc/Schleswig-Holstein.txt");
-	calculate("resrc/Thueringen.txt");
+	calculate("resrc/Bayern.txt", 70550.11);
+	calculate("resrc/Saarland.txt", 2568.75);
+	calculate("resrc/badenWuertenberg.txt", 35751.48);
+	calculate("resrc/Berlin.txt", 887.70);
+	calculate("resrc/Brandenburg.txt", 29483.13);
+	calculate("resrc/Bremen.txt", 419.24);
+	calculate("resrc/Hamburg.txt", 755.16);
+	calculate("resrc/Hessen.txt", 21114.91);
+	calculate("resrc/MeckPommern.txt", 23190.76);
+	calculate("resrc/Niedersachsen.txt", 47612.88);
+	calculate("resrc/NordrheinWestfalen.txt", 34092.25);
+	calculate("resrc/ReinlandPfalz.txt", 19854.06);
+	calculate("resrc/Sachsen.txt", 18419.71);
+	calculate("resrc/SachsenAnhalt.txt", 20449.54);
+	calculate("resrc/Schleswig-Holstein.txt", 15799.25);
+	calculate("resrc/Thueringen.txt", 16172.50);
+
+	cout << endl
+			<< "Real Area Source: http://www.bernhard-gaul.de/wissen/bundeslaender.php"
+			<< endl;
 
 	return 0;
 }
