@@ -63,7 +63,7 @@ void calculate(string currentBundesland){
 			for(unsigned int i = 0; i < polygons.size(); i++){
 				AreaCounter counter(polygons.at(i).getPoints());
 				float floater2 = counter.calculateArea_2();
-				totalArea += floater2;
+				totalArea = totalArea + floater2;
 			}
 
 			cout << currentBundesland<<":  " <<totalArea << endl; // prints

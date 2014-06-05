@@ -56,15 +56,25 @@ float AreaCounter::calculateArea(){
 	float AreaCounter::calculateArea_2(){
 		float area = 0;
 
-		 for(unsigned int i = 1;i <= vect.size() - 2; i++){
-			 Point tempPointA = vect.at(i);
-			 Point tempPointB = vect.at(i == vect.size()-1 ? 0 : i+1);
-			 Point tempPointC = vect.at(i == 0 ? vect.size()-1 : i-1 );
+//		 for(unsigned int i = 1;i <= vect.size() - 2; i++){
+//			 Point tempPointA = vect.at(i);
+//			 Point tempPointB = vect.at(i == vect.size()-1 ? 0 : i+1);
+//			 Point tempPointC = vect.at(i == 0 ? vect.size()-1 : i-1 );
+//
+//
+//			area = area +  (((float)tempPointA.getY() * ( (float)tempPointC.getX() - (float)tempPointB.getX())) / 2);
+//			// area = area + ((float)tempPointA.getY() + tempPointB.getY()) / 2 * (tempPointA.getX() - tempPointB.getX());
+//			// cout << " X: " << tempPointA.getX() << " Y: " << tempPointA.getY() << " Area : " << area<< " tempArea: " << ((float)tempPointA.getY() + tempPointB.getY()) / 2 * (tempPointA.getX() - tempPointB.getX()) << endl;
+//		 }
+
+		 for(unsigned int i = 1; i < vect.size(); i++){
+			 if(i == vect.size() - 1){
+				 area += vect.at(i).getY() * ((vect.at(i-1).getX() - vect.at(0).getX())/2);
+			 }else {
+				 area += vect.at(i).getY() * ((vect.at(i-1).getX() - vect.at(i+1).getX())/2);
+			 }
 
 
-			area = area +  (((float)tempPointA.getY() * ( (float)tempPointC.getX() - (float)tempPointB.getX())) / 2);
-			// area = area + ((float)tempPointA.getY() + tempPointB.getY()) / 2 * (tempPointA.getX() - tempPointB.getX());
-			// cout << " X: " << tempPointA.getX() << " Y: " << tempPointA.getY() << " Area : " << area<< " tempArea: " << ((float)tempPointA.getY() + tempPointB.getY()) / 2 * (tempPointA.getX() - tempPointB.getX()) << endl;
 		 }
 
 		 return area;
