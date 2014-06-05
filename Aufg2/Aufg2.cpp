@@ -49,14 +49,12 @@ void calculate(string currentBundesland) {
 				float p1 = atof(
 						lineParts[0].substr(1, lineParts[0].length()).c_str());
 				float p2 = atof(lineParts[1].c_str());
+				Point lPoint = Point(p1, p2);
 				points.push_back(Point(p1, p2));
+				root = lPoint;
 			}
 
 		} else {
-//					cout << points.size() << " POINST SIZE" << endl;
-//					cout << polygons.size() << "POLYGON SIZEEEEEee"<< endl;
-//					cout << polygons.at(10).getPoints().size() << " Points in POLYGON SIZEEEEEee"<< endl;
-//					cout << polygons.at(0).getPoints().size() << " Points in POLYGON SIZEEEEEee"<< endl;
 			break;
 		}
 
@@ -76,24 +74,21 @@ void calculate(string currentBundesland) {
 int main() {
 
 	calculate("resrc/Bayern.txt");
-
-	/*	calculate("resrc/Saarland.txt");
-	 calculate("resrc/badenW�rttenbergg.txt");
-	 calculate("resrc/Berlin.txt");
-	 calculate("resrc/Brandenburg.txt");
-	 calculate("resrc/Bremen.txt");
-	 calculate("resrc/Hamburg.txt");
-	 calculate("resrc/Hessen.txt");
-	 calculate("resrc/MeckPommern.txt");
-	 calculate("resrc/Niedersachsen.txt");
-	 calculate("resrc/NordrheinWestfalen.txt");
-	 calculate("resrc/ReinlandPfalz.txt");
-	 calculate("resrc/Sachsen.txt");
-	 calculate("resrc/SachsenAnhalt.txt");
-	 calculate("resrc/Schleswig-Holstein.txt");
-	 calculate("resrc/Th�ringen.txt");
-
-	 */
+	calculate("resrc/Saarland.txt");
+	calculate("resrc/badenW�rttenbergg.txt");
+	calculate("resrc/Berlin.txt");
+	calculate("resrc/Brandenburg.txt");
+	calculate("resrc/Bremen.txt");
+	calculate("resrc/Hamburg.txt");
+	calculate("resrc/Hessen.txt");
+	calculate("resrc/MeckPommern.txt");
+	calculate("resrc/Niedersachsen.txt");
+	calculate("resrc/NordrheinWestfalen.txt");
+	calculate("resrc/ReinlandPfalz.txt");
+	calculate("resrc/Sachsen.txt");
+	calculate("resrc/SachsenAnhalt.txt");
+	calculate("resrc/Schleswig-Holstein.txt");
+	calculate("resrc/Th�ringen.txt");
 
 	return 0;
 }
