@@ -14,13 +14,28 @@
 #include <string>
 #include <stdio.h>
 
-
 class Point {
 public:
 	const double x, y;
-	Point(double x, double y) : x(x), y(y){};
+	Point(double x, double y) :
+			x(x), y(y) {
+	}
+	;
 	virtual ~Point();
 };
+
+namespace std {
+template<>
+struct hash<Point> {
+	std::size_t operator()(Point & c) const {
+		return hash<double>()(c.x) ^ hash<double>()(c.y);
+	}
+	std::size_t operator()(Point* c) const {
+		return hash<double>()(c->x) ^ hash<double>()(c->y);
+	}
+
+};
+}
 
 std::ostream& operator<<(std::ostream &strm, const Point &a);
 

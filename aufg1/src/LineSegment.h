@@ -16,11 +16,11 @@
 
 class LineSegment {
 private:
-	Point a, b;
 	int ccw(Point* a, Point* b, Point* c);
 public:
+	Point a, b;
 	LineSegment(Point a, Point b);
-	LineSegment(const LineSegment& other);
+	LineSegment(LineSegment& other);
 	bool cuts(LineSegment* otherLineSegment);
 	Point* getA();
 	Point* getB();
@@ -28,5 +28,14 @@ public:
 
 std::ostream& operator<<(std::ostream &strm, const LineSegment &a);
 std::ostream& operator<<(std::ostream &strm, const LineSegment* a);
+
+namespace std {
+template<>
+struct std::hash<LineSegment> {
+	size_t operator()(const LineSegment & l) const {
+		return hash<Point>()(l.a) ^ hash<Point>()(l.b);
+	}
+};
+}
 
 #endif /* LINESEGMENT_H_ */

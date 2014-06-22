@@ -30,7 +30,7 @@ void bench(string file) {
 	vector<LineSegment*> lineSegments;
 	string line;
 	ifstream infile;
-	infile.open("resources/Strecken_10000.txt");
+	infile.open(file);
 	while (true) // To get you all the lines.
 	{
 		getline(infile, line);
@@ -40,7 +40,8 @@ void bench(string file) {
 			double p2 = atof(lineParts[1].c_str());
 			double p3 = atof(lineParts[2].c_str());
 			double p4 = atof(lineParts[3].c_str());
-			lineSegments.push_back(new LineSegment(Point(p1, p2), Point(p3, p4)));
+			lineSegments.push_back(
+					new LineSegment(Point(p1, p2), Point(p3, p4)));
 		} else {
 			break;
 		}
@@ -56,7 +57,7 @@ void bench(string file) {
 	Progress progress = Progress(lineSegments.size());
 
 	LineSegment* segment = 0;
-	for (unsigned int i = 0 ; i < lineSegments.size() ; i++) {
+	for (unsigned int i = 0; i < lineSegments.size(); i++) {
 		segment = lineSegments.at(i);
 		for (int current = interval_start; current < num_segments; current++) {
 			LineSegment* segmentToCompare = lineSegments[current];

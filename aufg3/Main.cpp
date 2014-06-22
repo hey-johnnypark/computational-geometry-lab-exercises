@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <map>
+#include <unordered_set>
 #include "StringHelper.h"
 #include "LineSegment.h"
 #include "Point.h"
@@ -18,7 +19,16 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-	bench("resources/Strecken_1000.txt");
+	Point point = Point(1.2, 1.4);
+//	cout << hash<Point>()(point);
+
+	LineSegment line = LineSegment(point, Point(1, 1));
+//cout << hash<LineSegment>()(line);
+
+	unordered_set<LineSegment> set;
+	cout << set.size();
+	set.insert(line);
+//	bench("resources/Strecken_1000.txt");
 //	bench("resources/Strecken_10000.txt");
 	//bench("resources/Strecken_100000.txt");
 
@@ -40,7 +50,8 @@ void bench(string file) {
 			double p2 = atof(lineParts[1].c_str());
 			double p3 = atof(lineParts[2].c_str());
 			double p4 = atof(lineParts[3].c_str());
-			lineSegments.push_back(new LineSegment(Point(p1, p2), Point(p3, p4)));
+			lineSegments.push_back(
+					new LineSegment(Point(p1, p2), Point(p3, p4)));
 		} else {
 			break;
 		}
@@ -56,7 +67,7 @@ void bench(string file) {
 	Progress progress = Progress(lineSegments.size());
 
 	LineSegment* segment = 0;
-	for (unsigned int i = 0 ; i < lineSegments.size() ; i++) {
+	for (unsigned int i = 0; i < lineSegments.size(); i++) {
 		segment = lineSegments.at(i);
 		for (int current = interval_start; current < num_segments; current++) {
 			LineSegment* segmentToCompare = lineSegments[current];

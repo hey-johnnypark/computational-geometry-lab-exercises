@@ -7,7 +7,7 @@
 
 #include "LineSegment.h"
 
-LineSegment::LineSegment(const LineSegment &other) :
+LineSegment::LineSegment(LineSegment &other) :
 		a(other.a), b(other.b) {
 }
 ;
@@ -21,20 +21,20 @@ Point* LineSegment::getA() {
 	return &a;
 }
 
-Point* LineSegment::getB()  {
+Point* LineSegment::getB() {
 	return &b;
 }
 
 bool LineSegment::cuts(LineSegment* other) {
 	int test1 = ccw(&a, &b, other->getA()) * ccw(&a, &b, other->getB());
-	int test2 = ccw(other->getA(), other->getB(), &a) * ccw(other->getA(), other->getB(), &b);
+	int test2 = ccw(other->getA(), other->getB(), &a)
+			* ccw(other->getA(), other->getB(), &b);
 	return test1 <= 0 && test2 <= 0;
 }
 
 int LineSegment::ccw(Point* a, Point* b, Point* c) {
-	return (a->x * b->y - a->y * b->x)
-				+ (b->x * c->y - b->y * c->x)
-				+ (a->y * c->x - a->x * c->y);
+	return (a->x * b->y - a->y * b->x) + (b->x * c->y - b->y * c->x)
+			+ (a->y * c->x - a->x * c->y);
 }
 
 std::ostream& operator<<(std::ostream &strm, LineSegment &a) {
@@ -45,4 +45,7 @@ std::ostream& operator<<(std::ostream &strm, LineSegment* a) {
 	return strm << "LineSegment(" << a->getA() << ", " << a->getB() << ")";
 }
 
+bool operator==(const LineSegment l1, const LineSegment l2) {
+	return true;
+}
 
