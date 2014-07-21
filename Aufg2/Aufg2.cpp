@@ -95,14 +95,14 @@ void calculate(string currentBundesland, float realArea) {
 
 
 	float totalArea = 0;
-	std::string cityName;
+	std::string cityName = "";
 	for (unsigned int i = 0; i < polygons.size(); i++) {
 		AreaCounter counter(polygons.at(i).getPoints());
 		float floater2 = counter.calculateArea_2();
 		totalArea = totalArea + floater2;
 		//cout << polygons.at(i).pointInPolygon(Point(499.89102,405.76395)) << endl;
 		for(unsigned int j = 0; j < cities.size(); j++){
-			if(polygons.at(i).pointInPolygon(Point(cities.at(j).getX(),cities.at(j).getY())) == 1){
+			if(polygons.at(i).pointInPolygon(Point(cities.at(j).getX(),cities.at(j).getY())) == 1 && cityName == ""){
 				cityName = cities.at(j).getId();
 				break;
 			}
