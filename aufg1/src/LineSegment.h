@@ -21,7 +21,7 @@ public:
 	Point a, b;
 	LineSegment(Point a, Point b);
 	LineSegment(LineSegment& other);
-	bool cuts(LineSegment* otherLineSegment);
+	bool intersects(LineSegment* otherLineSegment);
 	Point* getA();
 	Point* getB();
 };

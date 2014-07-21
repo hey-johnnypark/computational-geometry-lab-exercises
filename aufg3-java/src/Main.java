@@ -59,11 +59,10 @@ public class Main {
 
     private static Queue<Event> initEventQueue(Collection<Segment> segments) {
         Queue<Event> eventQueue = new PriorityBlockingQueue<>();
-        for (Segment segment : segments) {
+        segments.forEach((segment) -> {
             eventQueue.add(new SegmentStart(segment));
             eventQueue.add(new SegmentEnd(segment));
-        }
+        });
         return eventQueue;
     }
-
 }

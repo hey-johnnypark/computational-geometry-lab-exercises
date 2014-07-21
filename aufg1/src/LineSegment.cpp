@@ -25,7 +25,7 @@ Point* LineSegment::getB() {
 	return &b;
 }
 
-bool LineSegment::cuts(LineSegment* other) {
+bool LineSegment::intersects(LineSegment* other) {
 	int test1 = ccw(&a, &b, other->getA()) * ccw(&a, &b, other->getB());
 	int test2 = ccw(other->getA(), other->getB(), &a)
 			* ccw(other->getA(), other->getB(), &b);

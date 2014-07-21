@@ -19,8 +19,8 @@ using namespace std;
 int main(int argc, char **argv) {
 
 	bench("resources/Strecken_1000.txt");
-//	bench("resources/Strecken_10000.txt");
-	//bench("resources/Strecken_100000.txt");
+	bench("resources/Strecken_10000.txt");
+	bench("resources/Strecken_100000.txt");
 
 }
 
@@ -53,7 +53,7 @@ void bench(string file) {
 
 	int interval_start = 1;
 	int num_segments = lineSegments.size();
-	int num_cuts = 0;
+	int num_intersections = 0;
 	Progress progress = Progress(lineSegments.size());
 
 	LineSegment* segment = 0;
@@ -61,15 +61,15 @@ void bench(string file) {
 		segment = lineSegments.at(i);
 		for (int current = interval_start; current < num_segments; current++) {
 			LineSegment* segmentToCompare = lineSegments[current];
-			if (segment->cuts(segmentToCompare)) {
-				num_cuts++;
+			if (segment->intersects(segmentToCompare)) {
+				num_intersections++;
 			}
 		}
 		interval_start++;
 		progress.incrProgress();
 	}
 
-	cout << "# of cuts between line segments: " << num_cuts << endl;
+	cout << "# of cuts between line segments: " << num_intersections << endl;
 
 	long duration = time(NULL) * 1000 - start;
 	cout << "Total time needed: " << duration << "ms" << endl << endl;
