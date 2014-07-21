@@ -15,12 +15,14 @@ using namespace std;
 #include <iostream>
 #include "StringHelper.h"
 #include "Polygon.h"
+#include "City.h"
 
 const float area_factor = 1.17103781508;
 
 void calculate(string currentBundesland, float realArea) {
 	std::vector<Point> points;
 	std::vector<Polygon> polygons;
+	std::vector<City> cities;
 	string line;
 	ifstream infile;
 	infile.open(currentBundesland.c_str());
@@ -65,16 +67,51 @@ void calculate(string currentBundesland, float realArea) {
 	}
 
 	infile.close();
+	infile.open("resrc/City.txt");
+
+	while (true) // To get you all the lines.
+	{
+		getline(infile, line);
+		if(line != ""){
+			vector<string> lineParts = StringHelper::split(line, ';');
+			string id = lineParts[0].c_str();
+			float p1 = atof(lineParts[1].c_str());
+			float p2 = atof(lineParts[2].c_str());
+			City city = City(id, p1, p2);
+			//cout << city.getId() << " x: "<<city.getX() << " y: " << city.getY() << endl;
+			cities.push_back(city);
+
+
+		}else{
+			break;
+
+		}
+
+
+	}
+
+	infile.close();
+
+
+
 	float totalArea = 0;
+	std::string cityName;
 	for (unsigned int i = 0; i < polygons.size(); i++) {
 		AreaCounter counter(polygons.at(i).getPoints());
 		float floater2 = counter.calculateArea_2();
 		totalArea = totalArea + floater2;
+		//cout << polygons.at(i).pointInPolygon(Point(499.89102,405.76395)) << endl;
+		for(unsigned int j = 0; j < cities.size(); j++){
+			if(polygons.at(i).pointInPolygon(Point(cities.at(j).getX(),cities.at(j).getY())) == 1){
+				cityName = cities.at(j).getId();
+				break;
+			}
+		}
 	}
 
 	cout << currentBundesland << ":  " << totalArea * area_factor << "( Poly: "
 			<< polygons.size() << ") " << "Real-Area: " << realArea
-			<< " square km" << endl;
+			<< " square km" <<  " Stadt: " << cityName << endl;
 }
 
 int main() {

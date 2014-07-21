@@ -9,8 +9,9 @@
 #define POINT_H_
 
 class Point {
-	float x,y;
+
 public:
+	float x,y;
 	Point(float x, float y);
 	virtual ~Point();
 
@@ -21,6 +22,13 @@ public:
 		return y;
 	}
 
+	void setX(float x) {
+		this->x = x;
+	}
+
+	void setY(float y) {
+		this->y = y;
+	}
 };
 
 #endif /* POINT_H_ */
