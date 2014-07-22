@@ -2,14 +2,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Queue;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -34,20 +35,6 @@ public class Main {
         return sweepLine.getNumIntersections();
     }
 
-    private static List<Segment> readLines(String path) throws IOException {
-        List<Segment> lines = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(path)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(byLine(line));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
     private static Segment byLine(String line) {
         String[] pointsAsStrings = line.split(" ");
         return new Segment(
@@ -55,6 +42,11 @@ public class Main {
             , Double.parseDouble(pointsAsStrings[1])
             , Double.parseDouble(pointsAsStrings[2])
             , Double.parseDouble(pointsAsStrings[3]));
+    }
+
+    private static List<Segment> readLines(String path) throws IOException {
+        List<Segment> lines = Files.lines(Paths.get(path)).map((line) -> byLine(line)).collect(Collectors.toList());
+        return lines;
     }
 
     private static Queue<Event> initEventQueue(Collection<Segment> segments) {
